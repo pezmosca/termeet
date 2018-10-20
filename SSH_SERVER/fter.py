@@ -120,7 +120,7 @@ def EditStudy():
     ProfileMenu()
 
 def EditSearching():
-    print "1. Other, 2. Male, 3. Male & Other, 4. Female, 5.Female & Other, 6. Male & Female, 7. Everything is fine for me"
+    print "1. Other, 2. Male, 3. Male & Other, 4. Female, 5.Female & Other, 6. Male & Female, 7. Everything is fine to me"
     profile.searching = int(input())
     ProfileMenu()
 
@@ -159,26 +159,32 @@ def EditAge():
         # CAPAMEDIA.editAge(age,userID)
         print str(age)
     else:
-        if age>18:
+        if age<18:
             print "Try again, lie this time"
         else: print "WTF? Why you still alive?"
     ProfileMenu()
 
 
-def ViewProfile():
+def ViewProfil(profile):
     print "Image"
-    print "Nick: "+ profile.nick
-    print "Full Name: "+ profile.fullName
+    print "Nick: " + profile.nick
+    print "Full Name: " + profile.fullName
+    print "Interests: " + profile.interests
     print "Age: " + str(profile.age)
-    print "Gender: "+ profile.gender
-    searching = ["None", "Others", "Boys", "Boys & Others", "Girls", "Girls & Others", "Girls & Boys", "I love people not their genitals"]
+    print "Gender: " + profile.gender
+    searching = ["None", "Others", "Boys", "Boys & Others", "Girls", "Girls & Others", "Girls & Boys",
+                 "I love people not their genitals"]
     if profile.searching == 7:
         print "Searching: I love people not their genitals"
-    else: print "Searching: "+ searching[profile.searching]
+    else:
+        print "Searching: " + searching[profile.searching]
     print "Work: " + profile.work
     print "Study: " + profile.study
     print
     print
+
+def ViewProfile():
+    ViewProfil(profile)
     ProfileMenu()
 
 def AddInterest():
@@ -193,7 +199,7 @@ def AddInterest():
     print
 
     entrada = input()
-    nuevosIntereses = []
+    nuevosIntereses = profile.interests
     nuevosIntereses2 = []
     nuevosIntereses.append("/")
 
@@ -221,16 +227,19 @@ def InboxMenu():
 
     # superlikes[] = CAPAMEDIA.getSuperlikes(userID)
 
-    print "If you want to see more about a match, press 1, enter and write his/her nick.\n If you want to come back to menú, press 2."
+    print "If you want to see more about a match, press 1.\n If you want to come back to menu, press 2."
     aux=input()
     if aux == 1:
-        nick =input()
+        print "Write your posible love name: "
+        nick = input()
         b = False;
         for m in matches:
             if m.nick == nick:
-                ViewProfile()
-                b=True;
-
+                ViewProfil(m)
+                b = True;
+        if not b:
+            print "There's no person called " + nick
+    else:
         ExitProfileMenu()
 
 

@@ -2,7 +2,7 @@ class Profile:
     userID = 3
     nick = "Hulio"
     fullName = "Hulio Biffle Palo Alto"
-    interests = "Baguete"
+    interests = "#Baguete"
     description = "Olala"
     age = 47
     gender = "Male"
