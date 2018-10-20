@@ -198,13 +198,14 @@ def AddInterest():
         print (str(i) + ". " + interes),
     print
 
-    entrada = input()
-    nuevosIntereses = profile.interests
+    entrada = int(input())
+    nuevosIntereses = profile.interests.split("/")
     nuevosIntereses2 = []
     nuevosIntereses.append("/")
 
     while entrada != 0:
-        nuevosIntereses.append(intereses[int(entrada)])
+        nuevosIntereses.append(intereses[int(entrada)-1])
+        profile.interests = profile.interests  + intereses[int(entrada)-1] + "/"
         nuevosIntereses2.append(int(entrada))
         nuevosIntereses.append("/")
         for ni in nuevosIntereses:
@@ -213,6 +214,7 @@ def AddInterest():
         entrada = input()
 
     #CAPAMEDIA.addTags(userID, nuevosIntereses2)
+
     ProfileMenu()
 
 
