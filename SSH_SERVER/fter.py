@@ -86,12 +86,12 @@ def ProfileMenu():
     switcher = {
         1: ViewProfile,
         2: AddInterests,
-        3: NewDescription,
-        4: EditAge,
-        5: EditGender,
-        6: AddSearching,
-        7: EditWork,
-        8: EditStudy
+        #3: NewDescription,
+        #4: EditAge,
+        #5: EditGender,
+        #6: AddSearching,
+        #7: EditWork,
+        #8: EditStudy
     }
     switchFun(menuOption, switcher)
 
@@ -102,12 +102,14 @@ def ViewProfile():
     print "Age: " + profile.age
     #...
 
-def AddInterest():
+def AddInterests():
     #intereses[] = CAPAMEDIA.dameTodosTagsDeIntereses()
-    intereses = [#Fuertes, #Tontos, #C++, #PatinajeArtistico]
-    for 
+    print "Choose all the tags you identify with: "
+    intereses = ["#Fuertes", "#Tontos", "#C++", "#PatinajeArtistico"]
 
-def
+    for interes in intereses:
+        print
+
 
 def InboxMenu():
     print SubMenuTitle + "/Inbox"
