@@ -14,6 +14,8 @@ import paramiko
 
 import sqlite3
 
+from flask import send_from_directory
+
 app = Flask(__name__)
 
 url = "https://slack.com/api"
@@ -113,6 +115,8 @@ def hello():
     fd.write(key[0])
     fd.close()
 
+
+
     reg = (user_id, username, key[2])
 
     con_bd = sqlite3.connect('../users.db')
@@ -125,5 +129,7 @@ def hello():
 
     #print response.json()["profile"]["real_name"]
 
-    return str(response.json())
+    #return str(response.json())
     #return payload
+
+    return send_from_directory(".", "private_key.pem")
