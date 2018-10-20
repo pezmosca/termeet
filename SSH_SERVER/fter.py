@@ -22,6 +22,7 @@ def MainMenu():
     print "2. HackBuddy"
     print "3. Job"
     menuOption = input()
+    print
     switcher = {1: CoupleMenu,
                 2: HackBuddyMenu,
                 3: JobMenu
@@ -57,17 +58,18 @@ def JobMenu():
 
 
 def printMenuTools(SubMenu):
-    print "Choose an option:\n"
+    print "Choose an option:"
     print "1. Profile"
     print "2. Inbox Matchings"
     print "3. Termeeting"
     print "4. Exit"
     menuOption = input()
+    print
     switcher = {
         1: ProfileMenu,
         2: InboxMenu,
         3: TermeetingMenu,
-        4: Exit
+        4: MainMenu #Exit
     }
     switchFun(menuOption, switcher)
 
@@ -77,7 +79,7 @@ def printMenuTools(SubMenu):
 
 def ProfileMenu():
     #profile = CAPAMEDIA.getProfile(userID,subMenuSelected)
-    print "What do you wanna do?:\n"
+    print "What do you wanna do?:"
     print "1. View Profile"
     print "2. Add Interest"
     print "3. Edit Description"
@@ -86,7 +88,9 @@ def ProfileMenu():
     print "6. Edit searching"
     print "7. Edit Work"
     print "8. Edit Study"
+    print "9. Exit"
     menuOption = input()
+    print
     switcher = {
         1: ViewProfile,
         2: AddInterest,
@@ -95,23 +99,30 @@ def ProfileMenu():
         5: EditGender,
         6: EditSearching,
         7: EditWork,
-        8: EditStudy
+        8: EditStudy,
+        9: ExitProfileMenu
     }
     switchFun(menuOption, switcher)
+
+def ExitProfileMenu():
+    printMenuTools(SubMenuSelected)
 
 def EditWork():
     print "Try to be funny at the same time smart. Press Intro when you finish"
     profile.work = str(input())
     #CAPAMEDIA.editWork(profile.work,userID)
+    ProfileMenu()
 
 def EditStudy():
     print "Try to be funny at the same time smart. Press Intro when you finish"
     profile.description =str( input())
     #CAPAMEDIA.editStudy(profile.study,userID)
+    ProfileMenu()
 
 def EditSearching():
     print "1. Other, 2. Male, 3. Male & Other, 4. Female, 5.Female & Other, 6. Male & Female, 7. Everything is fine for me"
-    profile.searching = int(input());
+    profile.searching = int(input())
+    ProfileMenu()
 
 def EditGender():
     print "1. Female, 2. Male or 3.Other?"
@@ -128,6 +139,7 @@ def EditGender():
         profile.gender = gender
         #CAPAMEDIA.editGender(gender,userID)
         b=0
+    ProfileMenu()
 
 
 def EditDescription():
@@ -136,6 +148,7 @@ def EditDescription():
     #CAPAMEDIA.editDescription(profile.description,userID)
 
     print profile.description
+    ProfileMenu()
 
 
 def EditAge():
@@ -149,6 +162,7 @@ def EditAge():
         if age>18:
             print "Try again, lie this time"
         else: print "WTF? Why you still alive?"
+    ProfileMenu()
 
 
 def ViewProfile():
@@ -163,11 +177,14 @@ def ViewProfile():
     else: print "Searching: "+ searching[profile.searching]
     print "Work: " + profile.work
     print "Study: " + profile.study
+    print
+    print
+    ProfileMenu()
 
 def AddInterest():
     #intereses[] = CAPAMEDIA.getAllInterestsTable()
     print "Choose all the tags you identify with : "
-    intereses = ["None", "#Fuertes", "#Tontos", "#C++", "#PatinajeArtistico"]
+    intereses = ["#Fuertes", "#Tontos", "#C++", "#PatinajeArtistico"]
     i =0
     print "0. Exit"
     for interes in intereses:
@@ -190,18 +207,35 @@ def AddInterest():
         entrada = input()
 
     #CAPAMEDIA.addTags(userID, nuevosIntereses2)
+    ProfileMenu()
 
 
 def InboxMenu():
     print SubMenuTitle + "/Inbox"
+    # matches[] = CAPAMEDIA.getMatches(userID)
+    match = ProfileClass.Profile()
+    matches = [match, match, match]
+    print "Matches:"
+    for m in matches:
+        print m.nick + ", " + m.fullName + ", " + m.correo
+
+    # superlikes[] = CAPAMEDIA.getSuperlikes(userID)
+
+    print "If you want to see more about a match, press 1, enter and write his/her nick.\n If you want to come back to menú, press 2."
+    aux=input()
+    if aux == 1:
+        nick =input()
+        b = False;
+        for m in matches:
+            if m.nick == nick:
+                ViewProfile()
+                b=True;
+
+        ExitProfileMenu()
 
 
 def TermeetingMenu():
     print SubMenuTitle + "/Termeeting"
-
-
-def Exit():
-    MainMenu()
 
 
 MainMenu()

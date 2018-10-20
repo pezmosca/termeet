@@ -10,6 +10,7 @@ class Profile:
     work = "Baguete maker"
     study = "Your body"
     urlFoto = "randomurl"
+    correo = "hulioQuiereTuBody@fib.upc.edu"
 
 def __init__(self,nick,fullname,interests,description,age,gender,searching,work,study):
     self.nick = nick
