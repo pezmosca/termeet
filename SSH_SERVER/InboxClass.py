@@ -1,7 +1,7 @@
 #Atributos y funcion que llama a la BD para rellenarlo
 class MatchesClass:
     nick = "Paola"
-    fullName = "Paola"
+    fullName = "Paolita"
     correo = "paola@est.fib.upc"
 
 def __init__(self):
