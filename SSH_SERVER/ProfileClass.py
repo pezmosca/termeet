@@ -1,13 +1,15 @@
 class Profile:
+    userID = 3
     nick = "Hulio"
     fullName = "Hulio Biffle Palo Alto"
     interests = "Baguete"
     description = "Olala"
-    age = "47"
+    age = 47
     gender = "Male"
-    searching = "3"
+    searching = 3
     work = "Baguete maker"
     study = "Your body"
+    urlFoto = "randomurl"
 
 def __init__(self,nick,fullname,interests,description,age,gender,searching,work,study):
     self.nick = nick
