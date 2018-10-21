@@ -91,7 +91,8 @@ def ProfileMenu():
     print "6. Edit searching"
     print "7. Edit Work"
     print "8. Edit Study"
-    print "9. Exit"
+    print "9. Edit Mail"
+    print "10. Exit"
     menuOption = input()
     print
     switcher = {
@@ -103,28 +104,35 @@ def ProfileMenu():
         6: EditSearching,
         7: EditWork,
         8: EditStudy,
-        9: ExitProfileMenu
+        9: EditCorreo,
+        10: ExitProfileMenu
     }
     switchFun(menuOption, switcher)
 
 def ExitProfileMenu():
     printMenuTools(SubMenuSelected)
 
+def EditCorreo():
+    print "Give me your mail babe. Press Intro when you finish"
+    profile.work = str(raw_input())
+    #CAPAMEDIA.editWork(profile.work,userID)
+    ProfileMenu()
+
 def EditWork():
-    print "Try to be funny at the same time smart. Press Intro when you finish"
-    profile.work = str(input())
+    print "Tell us about how you manage the work ;). Press Intro when you finish"
+    profile.work = str(raw_input())
     #CAPAMEDIA.editWork(profile.work,userID)
     ProfileMenu()
 
 def EditStudy():
-    print "Try to be funny at the same time smart. Press Intro when you finish"
-    profile.description =str( input())
+    print "Tell us about your studies stuff. Press Intro when you finish"
+    profile.description =str(raw_input())
     #CAPAMEDIA.editStudy(profile.study,userID)
     ProfileMenu()
 
 def EditSearching():
     print "1. Other, 2. Male, 3. Male & Other, 4. Female, 5.Female & Other, 6. Male & Female, 7. Everything is fine to me"
-    profile.searching = int(input())
+    profile.searching = int(raw_input())
     ProfileMenu()
 
 def EditGender():
@@ -147,7 +155,7 @@ def EditGender():
 
 def EditDescription():
     print "Try to be funny at the same time smart. Press Intro when you finish"
-    profile.description = input()
+    profile.description = raw_input()
     #CAPAMEDIA.editDescription(profile.description,userID)
 
     print profile.description
@@ -161,10 +169,14 @@ def EditAge():
     if age>18 and age <100:
         # CAPAMEDIA.editAge(age,userID)
         print str(age)
+        print
     else:
         if age<18:
             print "Try again, lie this time"
-        else: print "WTF? Why you still alive?"
+            print
+        else:
+            print "WTF? Why you still alive?"
+            print
     ProfileMenu()
 
 
@@ -172,6 +184,7 @@ def ViewProfil(profile):
     print "Image"
     print "Nick: " + profile.nick
     print "Full Name: " + profile.fullName
+    print "Mail: " + profile.correo
     print "Interests: " + profile.interests
     print "Description: " + profile.description
     print "Age: " + str(profile.age)
@@ -275,13 +288,17 @@ def TermeetingMenu():
         print
         print "Use S To accept, A to Refuse, W To SuperMeet, Z to see more about "
         arrow = raw_input()
-        if arrow == 'Z' or arrow == 'z':
+        while arrow == 'Z' or arrow == 'z':
             ViewProfil(c)
-        elif arrow =='S' or arrow == 's':
+            print "Use S To accept, A to Refuse, W To SuperMeet"
+            arrow = raw_input()
+
+        if arrow =='S' or arrow == 's':
             #accept = CAPAMEDIA.likeFromTo(userID, c.userID)
             accept = True
             if accept ==True:
                 print "MATCH!"
+                print
     print "Oh! There are not more people for you!"
 
 
