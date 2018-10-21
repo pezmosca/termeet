@@ -2,21 +2,23 @@ import ProfileClass
 import json
 import imgToAsciiArt2
 
-
 def switchFun(argument, switcher):
     func = switcher.get(argument, lambda: "Invalid number")
     func()
 
+def setImageAscii (image_file_path):
+    global imageAscii
+
+    imageAscii = imgToAsciiArt2.handle_image_conversion(image_file_path)
 
 def MainMenu():
     global userID
     #userID = Connect to server(userID)
     userID = "Pedrito"
+    #demo()
+    setImageAscii("http://www.vistoenforocoches.com/wp-content/uploads/2014/12/gandalf_forocoches-620x350.jpg")
     global profile
     profile = ProfileClass.Profile()
-    image_file_path = "IriaSlack.jpg"
-    global imageAscii
-    imageAscii = imgToAsciiArt2.handle_image_conversion(image_file_path)
     print "Welcome to TerMeet "
     f = open('termita.txt', 'r')
     mensaje = f.read()
@@ -35,6 +37,24 @@ def MainMenu():
                 }
     switchFun(menuOption, switcher)
 
+
+
+
+
+def demo():
+    #nick, fullname, interests, description, age, gender, searching, work, study, correo
+    global profile
+    profile = ProfileClass.Profile()
+    global profile2
+    profile2 = ProfileClass.Profile("Sofi","Sofia Vergara","/#Futbol/#Leopardo/","A mi megusta que me traten como dama", 47,"Female",4, "What's that?","Peluqueria & Driver Licence","jaaaaay@gmail.com","https://e00-elmundo.uecdn.es/assets/multimedia/imagenes/2015/04/08/14285125894460.jpg")
+    global profile3
+    profile3 = ProfileClass.Profile("Gandalf", "El gris o el Blanco", "/#Neutrex/#HermioneGranger/",
+                                    "You shall not pass", 97, "Other", 7, "What's that?",
+                                    "White magic", "hobbiteameEsta@gmail.com","http://www.vistoenforocoches.com/wp-content/uploads/2014/12/gandalf_forocoches-620x350.jpg")
+    global profile4
+    profile4 = ProfileClass.Profile("Pablo", "Pablo Casado", "/#PP/#ClubDeCampo/",
+                                    "Eramos mas felices en 1985", 38, "Male", 2, "Divulgacion artistica",
+                                    "Master por la JuanK", "noMeEnviesSpam@gmail.com","https://pbs.twimg.com/profile_images/1042688743096893441/mvBmUcZ__400x400.jpg")
 
 def CoupleMenu():
     global SubMenuTitle
@@ -188,6 +208,7 @@ def EditAge():
 
 
 def ViewProfil(profile):
+    setImageAscii("http://www.vistoenforocoches.com/wp-content/uploads/2014/12/gandalf_forocoches-620x350.jpg")
     print imageAscii
     print "Nick: " + profile.nick
     print "Full Name: " + profile.fullName

@@ -4,7 +4,7 @@ from PIL import Image
 
 ASCII_CHARS = [ '#', '?', '%', '.', 'S', '+', '.', '*', ':', ',', '@']
 
-def scale_image(image, new_width=50):
+def scale_image(image, new_width=100):
     """Resizes an image preserving the aspect ratio.
     """
     (original_width, original_height) = image.size
@@ -17,7 +17,7 @@ def scale_image(image, new_width=50):
 def convert_to_grayscale(image):
     return image.convert('L')
 
-def map_pixels_to_ascii_chars(image, range_width=25):
+def map_pixels_to_ascii_chars(image, range_width=100):
     """Maps each pixel to an ascii char based on the range
     in which it lies.
 
@@ -43,10 +43,13 @@ def convert_image_to_ascii(image):
 
     return "\n".join(image_ascii)
 
+import urllib, cStringIO
+
 def handle_image_conversion(image_filepath):
     image = None
     try:
-        image = Image.open(image_filepath)
+        file = cStringIO.StringIO(urllib.urlopen(image_filepath).read())
+        image = Image.open(file)
     except Exception, e:
         print "Unable to open image file {image_filepath}.".format(image_filepath=image_filepath)
         print e

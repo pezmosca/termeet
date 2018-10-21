@@ -9,10 +9,11 @@ class Profile:
     searching = 3
     work = "Baguete maker"
     study = "Your body"
-    urlFoto = "randomurl"
+    urlFoto = "https://www.eldiario.es/fotos/Joaquin-campo-Real-Betis-Balompie_EDIIMA20181006_0422_19.jpg"
     correo = "hulioQuiereTuBody@fib.upc.edu"
 
-def __init__(self,nick,fullname,interests,description,age,gender,searching,work,study):
+def  __init__(self,nick,fullname,interests,description,age,gender,searching,work,study,correo,urlFoto):
+    # type: (object, object, object, object, object, object, object, object, object, object, object, object) -> object
     self.nick = nick
     self.fullName = fullname
     self.interests = interests
@@ -22,6 +23,8 @@ def __init__(self,nick,fullname,interests,description,age,gender,searching,work,
     self.searching = searching
     self.work = work
     self.study =study
+    self.correo = correo
+    self.urlFoto = urlFoto
 
 
 def __init__(self):
