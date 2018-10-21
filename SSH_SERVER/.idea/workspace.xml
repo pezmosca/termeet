@@ -18,22 +18,22 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="6" />
+          <entry key="py" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="6" />
+          <entry key="Python" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1503" />
+          <entry key="py" value="1595" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1503" />
+          <entry key="Python" value="1595" />
         </counts>
       </usages-collector>
     </session>
@@ -43,11 +43,23 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/fter.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4061">
-              <caret line="276" column="5" selection-start-line="276" selection-start-column="5" selection-end-line="276" selection-end-column="5" />
+            <state relative-caret-position="119">
+              <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
-                <marker date="1540088806483" expanded="true" signature="2436:2615" ph="..." />
+                <marker date="1540089955305" expanded="true" signature="2582:2761" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/imgToAsciiArt2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="426">
+              <caret line="55" column="10" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#10#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -83,6 +95,8 @@
       <find>profile</find>
       <find>getPr</find>
       <find>Love</find>
+      <find>what</find>
+      <find>Image</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -92,11 +106,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/ProfileClass.py" />
+        <option value="$PROJECT_DIR$/imgToAsciiArt2.py" />
         <option value="$PROJECT_DIR$/fter.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
     <option name="width" value="697" />
     <option name="height" value="735" />
@@ -150,10 +165,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="697" height="735" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13960546" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.06845238" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
       <window_info anchor="bottom" id="Python Console" />
@@ -192,13 +208,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/imgToAsciiArt2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="426">
+          <caret line="55" column="10" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/fter.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4061">
-          <caret line="276" column="5" selection-start-line="276" selection-start-column="5" selection-end-line="276" selection-end-column="5" />
+        <state relative-caret-position="119">
+          <caret line="16" column="27" selection-start-line="16" selection-start-column="27" selection-end-line="16" selection-end-column="27" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
-            <marker date="1540088806483" expanded="true" signature="2436:2615" ph="..." />
+            <marker date="1540089955305" expanded="true" signature="2582:2761" ph="..." />
           </folding>
         </state>
       </provider>

@@ -1,5 +1,6 @@
 import ProfileClass
 import json
+import imgToAsciiArt2
 
 
 def switchFun(argument, switcher):
@@ -13,7 +14,9 @@ def MainMenu():
     userID = "Pedrito"
     global profile
     profile = ProfileClass.Profile()
-
+    image_file_path = "IriaSlack.jpg"
+    global imageAscii
+    imageAscii = imgToAsciiArt2.handle_image_conversion(image_file_path)
     print "Welcome to TerMeet "
     f = open('termita.txt', 'r')
     mensaje = f.read()
@@ -55,6 +58,7 @@ def JobMenu():
     global SubMenuTitle
     global SubMenuSelected
     SubMenuSelected = 3
+
     SubMenuTitle = "Termeet/Job"
     print SubMenuTitle
     printMenuTools(SubMenuSelected)
@@ -184,7 +188,7 @@ def EditAge():
 
 
 def ViewProfil(profile):
-    print "Image"
+    print imageAscii
     print "Nick: " + profile.nick
     print "Full Name: " + profile.fullName
     print "Mail: " + profile.correo
@@ -264,12 +268,12 @@ def InboxMenu():
         b = False;
         for m in matches:
             if m.nick == nickLove:
-                print
+
                 ViewProfil(m)
-                b = True;
+                b = True
         if not b:
             print "There's no person called " + nickLove
-
+    print
     ExitProfileMenu()
 
 
@@ -285,8 +289,7 @@ def TermeetingMenu():
     candidatos = [match, match2, match3]
     for c in candidatos:
         print "Do you like what you see?"
-        print
-        print "Image"
+        print imageAscii
         print "Nick: " + c.nick
         print "Name: " + c.fullName
         print
