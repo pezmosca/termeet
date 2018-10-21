@@ -24,7 +24,6 @@ def __init__(self,nick,fullname,interests,description,age,gender,searching,work,
     self.study =study
 
 
-
 def __init__(self):
         self.data = []
 

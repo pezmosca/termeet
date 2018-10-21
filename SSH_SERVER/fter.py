@@ -114,14 +114,16 @@ def ExitProfileMenu():
 
 def EditCorreo():
     print "Give me your mail babe. Press Intro when you finish"
-    profile.work = str(raw_input())
-    #CAPAMEDIA.editWork(profile.work,userID)
+    profile.correo = str(raw_input())
+    #CAPAMEDIA.editMail(profile.correo,userID)
+    print
     ProfileMenu()
 
 def EditWork():
     print "Tell us about how you manage the work ;). Press Intro when you finish"
     profile.work = str(raw_input())
     #CAPAMEDIA.editWork(profile.work,userID)
+    print
     ProfileMenu()
 
 def EditStudy():
@@ -133,6 +135,7 @@ def EditStudy():
 def EditSearching():
     print "1. Other, 2. Male, 3. Male & Other, 4. Female, 5.Female & Other, 6. Male & Female, 7. Everything is fine to me"
     profile.searching = int(raw_input())
+    print
     ProfileMenu()
 
 def EditGender():
@@ -150,6 +153,7 @@ def EditGender():
         profile.gender = gender
         #CAPAMEDIA.editGender(gender,userID)
         b=0
+    print
     ProfileMenu()
 
 
@@ -157,26 +161,25 @@ def EditDescription():
     print "Try to be funny at the same time smart. Press Intro when you finish"
     profile.description = raw_input()
     #CAPAMEDIA.editDescription(profile.description,userID)
-
-    print profile.description
+    print
     ProfileMenu()
 
 
 def EditAge():
     print "Age is only a number."
-    profile.age = int(input())
-    age = profile.age
+
+    age = int(input())
     if age>18 and age <100:
         # CAPAMEDIA.editAge(age,userID)
-        print str(age)
-        print
+        profile.age = age
+
     else:
         if age<18:
             print "Try again, lie this time"
-            print
+
         else:
             print "WTF? Why you still alive?"
-            print
+    print
     ProfileMenu()
 
 
@@ -198,7 +201,7 @@ def ViewProfil(profile):
     print "Work: " + profile.work
     print "Study: " + profile.study
     print
-    print
+
 
 def ViewProfile():
     ViewProfil(profile)
@@ -209,7 +212,7 @@ def AddInterest():
     print "Choose all the tags you identify with : "
     intereses = ["#Fuertes", "#Tontos", "#C++", "#PatinajeArtistico"]
     i =0
-    print "0. Exit"
+    print "To go back to menu press 0."
     for interes in intereses:
         i = i + 1
         print (str(i) + ". " + interes),
@@ -233,11 +236,12 @@ def AddInterest():
 
         #CAPAMEDIA.addTags(userID, nuevosIntereses2)
     else: print "There's no number " + entrada
+    print
     ProfileMenu()
 
 
 def InboxMenu():
-    print SubMenuTitle + "/Inbox"
+    #print SubMenuTitle + "/Inbox"
     # matches[] = CAPAMEDIA.getMatches(userID)
     match = ProfileClass.Profile()
     match2 = ProfileClass.Profile()
@@ -270,7 +274,7 @@ def InboxMenu():
 
 
 def TermeetingMenu():
-    print SubMenuTitle + "/Termeeting"
+    #print SubMenuTitle + "/Termeeting"
     # candidatos[] = CAPAMEDIA.getCandidatos(userID)
     match = ProfileClass.Profile()
     match2 = ProfileClass.Profile()
