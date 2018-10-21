@@ -30,6 +30,9 @@ import paramiko
 from paramiko.py3compat import b, u, decodebytes
 import sqlite3
 
+import pymysql
+
+
 
 # setup logging
 paramiko.util.log_to_file("demo_server.log")
@@ -38,7 +41,38 @@ host_key = paramiko.RSAKey(filename="test_rsa.key")
 print("Read key: " + u(hexlify(host_key.get_fingerprint())))
 
 
+
+
 class Server(paramiko.ServerInterface):
+
+    # It connects to the Auth DB
+    def connect_db(self):
+        #create table sessions (user_id bigint(20) unsigned not null, public_uuid varchar(50) not null, token varchar(500), primary key(user_id));
+        connection = pymysql.connect(host = os.environ.get("AUTH_DB_HOST"),
+                               user = os.environ.get("AUTH_DB_USERNAME"),
+                               passwd = os.environ.get("AUTH_DB_PASSWORD"),
+                               db = os.environ.get("AUTH_DB_NAME"),
+                               port = 3306,
+                               cursorclass = pymysql.cursors.DictCursor,
+                               connect_timeout = 5)
+        return connection
+
+    # Giving a WP username it returns the whole WP info of the user
+    def get_user_by_username(self, username):
+        connection = self.connect_db()
+        try:
+            with connection.cursor() as cursor:
+                sql_id = "SELECT * FROM `USER_PROFILE` WHERE USERNAME = %s"
+                cursor.execute(sql_id, (username,));
+                if cursor.rowcount == 0:
+                    return make_response('The query did not produce any results (no user found).', HTTPStatus.BAD_REQUEST.value)
+                user = cursor.fetchone()
+        except pymysql.MySQLError as error:
+            print('Got error {!r}, errno is {}'.format(error, error.args[0]))
+
+        connection.close()
+        return user
+
     # 'data' is the output of base64.b64encode(key)
     # (using the "user_rsa_key" files)
     data = (
@@ -68,16 +102,20 @@ class Server(paramiko.ServerInterface):
         ##Vete a buscar a la BD la clave publica
         print("Auth attempt with key: " + u(hexlify(key.get_fingerprint())))
 
-        con_bd = sqlite3.connect("../users.db")
-        con_bd.row_factory = sqlite3.Row
-        cursor_agenda = con_bd.cursor()
-        user = (username, )
-        cursor_agenda.execute("SELECT * FROM logins WHERE username=?", user)
-        registro = cursor_agenda.fetchone()
-        print registro["username"]
+        #con_bd = sqlite3.connect("../users.db")
+        #con_bd.row_factory = sqlite3.Row
+        #cursor_agenda = con_bd.cursor()
+        #user = (username, )
+        #cursor_agenda.execute("SELECT * FROM logins WHERE username=?", user)
+        #registro = cursor_agenda.fetchone()
+        #print registro["username"]
+
+        print "HELLO"
+        user = self.get_user_by_username(username)
+        print user["BASE"]
 
         #print("Nombre", registro['username'])
-        good_pub_key = paramiko.RSAKey(data=decodebytes(registro["base"]))
+        good_pub_key = paramiko.RSAKey(data=decodebytes(user["BASE"]))
 
         if (username == "pezmosca") and (key == good_pub_key):
             return paramiko.AUTH_SUCCESSFUL

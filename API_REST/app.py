@@ -14,6 +14,8 @@ import paramiko
 
 import sqlite3
 
+import pymysql
+
 from flask import send_from_directory
 
 app = Flask(__name__)
@@ -77,6 +79,52 @@ def ssh_key_gen(length=1024, type='rsa', password=None, username='jumpserver', h
         raise IOError('These is error when generate ssh key.')
 
 
+# It connects to the Auth DB
+def connect_db():
+    #create table sessions (user_id bigint(20) unsigned not null, public_uuid varchar(50) not null, token varchar(500), primary key(user_id));
+    connection = pymysql.connect(host = os.environ.get("AUTH_DB_HOST"),
+                           user = os.environ.get("AUTH_DB_USERNAME"),
+                           passwd = os.environ.get("AUTH_DB_PASSWORD"),
+                           db = os.environ.get("AUTH_DB_NAME"),
+                           port = 3306,
+                           cursorclass = pymysql.cursors.DictCursor,
+                           connect_timeout = 5)
+    return connection
+
+
+# Giving a WP username it returns the whole WP info of the user
+def get_user_by_id(userID, subMenuSelected):
+    user = "BAD"
+    connection = connect_db()
+    try:
+        with connection.cursor() as cursor:
+            sql_id = "SELECT * FROM `USER_PROFILE` UP INNER JOIN %s OU ON UP.ID_USER = OU.ID_USER WHERE ID_USER = %s"
+            cursor.execute(sql_id, (subMenuSelected, userID,));
+            if cursor.rowcount == 0:
+                return make_response('The query did not produce any results (no user found).', HTTPStatus.BAD_REQUEST.value)
+            user = cursor.fetchone()
+    except pymysql.MySQLError as error:
+        print('Got error {!r}, errno is {}'.format(error, error.args[0]))
+
+    connection.close()
+    return user
+
+def getProfile(userID, subMenuSelected):
+    connection = connect_db()
+    try:
+        with connection.cursor() as cursor:
+            sql_id = "SELECT * FROM `USER_PROFILE` UP INNER JOIN %s OU ON UP.ID_USER = OU.ID_USER WHERE ID_USER = %s"
+            cursor.execute(sql_id, (subMenuSelected, userID,));
+            if cursor.rowcount == 0:
+                return make_response('The query did not produce any results (no user found).', HTTPStatus.BAD_REQUEST.value)
+            user = cursor.fetchone()
+    except pymysql.MySQLError as error:
+        print('Got error {!r}, errno is {}'.format(error, error.args[0]))
+
+    connection.close()
+    return user
+
+
 @app.route("/")
 def hello():
     ####TOKEN
@@ -117,14 +165,19 @@ def hello():
 
 
 
-    reg = (user_id, username, key[2])
+    reg = (username, key[2])
+    connection = connect_db()
+    cur = connection.cursor()
+    sql_id = "INSERT INTO `USER_PROFILE` (`USERNAME`, `BASE`)  VALUES(%s, %s)"
+    cur.execute(sql_id, reg)
+    connection.commit()
 
-    con_bd = sqlite3.connect('../users.db')
-    cursor_agenda = con_bd.cursor()
-    cursor_agenda.execute("INSERT INTO logins VALUES(?,?,?)", reg)
-    cursor_agenda.close()
-    con_bd.commit()
-    con_bd.close()
+    #con_bd = sqlite3.connect('../users.db')
+    #cursor_agenda = con_bd.cursor()
+    #cursor_agenda.execute("INSERT INTO logins VALUES(?,?,?)", reg)
+    #cursor_agenda.close()
+    #con_bd.commit()
+    #con_bd.close()
 
 
     #print response.json()["profile"]["real_name"]
@@ -133,3 +186,13 @@ def hello():
     #return payload
 
     return send_from_directory(".", "private_key.pem")
+
+@app.route("/hello")
+def hello2():
+    user = get_user_by_id(1,1)
+    return user['ID_SLACK']
+
+@app.route("/prueba")
+def hey():
+    user = getProfile(1,1)
+    return user
